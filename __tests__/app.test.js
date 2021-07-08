@@ -33,7 +33,7 @@ describe('auth routes', () => {
   it('logs a user in via POST', async () => {
     await UserService.create(user);
 
-    const res = await request(app)
+    const res = await request.agent(app)
       .post('/api/v1/auth/login')
       .send({
         username: 'me',
