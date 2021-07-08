@@ -3,30 +3,48 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import Spot from '../lib/models/Spot.js';
+import UserService from '../lib/services/UserService.js';
 
 const home = {
   name: 'home',
-  // userId: '1',
+  userId: '1',
   radius: 1,
   latitude: '45.505100',
   longitude: '-122.675000',
+  tags: ['couch', 'lamp']
 };
 
 const work = {
   name: 'work',
-  // userId: '1',
+  userId: '1',
   radius: 1,
   latitude: '45.505100',
   longitude: '-122.675000',
+  tags: ['couch', 'lamp']
 };
 
+
 describe('spot routes', () => {
-  beforeEach(() => {
-    return setup(pool);
+  let agent;
+  let user;
+
+  beforeEach(async () => {
+    await setup(pool);
+    agent = await request.agent(app);
+    user = await UserService.create({
+      username: 'Tis',
+      password: 'password',
+      phoneNumber: '50412344555'
+    });
+    await agent.post('/api/v1/auth/login')
+      .send({
+        username: 'Tis',
+        password: 'password'
+      });
   });
 
-  it('creates a spot via POST', async () => {
-    const res = await request(app)
+  it.only('creates a spot via POST', async () => {
+    const res = await agent
       .post('/api/v1/spots')
       .send(home);
 
@@ -91,6 +109,15 @@ describe('spot routes', () => {
     };
     
     expect(res.body).toEqual(expected);
+  });
+
+  it('deletes a spot via DELETE', async () => {
+    const spot = await Spot.create(home);
+
+    const res = await request(app)
+      .delete(`/api/v1/spots/${spot.id}`);
+
+    expect(res.body).toEqual(spot);
   });
 
 
