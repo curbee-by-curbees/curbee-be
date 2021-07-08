@@ -9,11 +9,11 @@ describe('finds routes', () => {
   });
 
   let find1 = {
-    userId: '1',
+    // userId: '1',
     title: 'Porcelain cat statue',
     isClaimed: false,
-    latitude: 45.519960,
-    longitude: -122.637980,
+    latitude: '45.519960',
+    longitude: '-122.637980',
     category: 'decor',
     tags: ['statue', 'cat']
   };
@@ -23,6 +23,6 @@ describe('finds routes', () => {
       .post('/api/v1/finds')
       .send(find1);
 
-    expect(res.body).toEqual({ ...find1, id: '1', createdAt: expect.any(Date) });
+    expect(res.body).toEqual({ ...find1, id: '1', createdAt: expect.any(String) });
   });
 });
