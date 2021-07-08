@@ -1,9 +1,8 @@
 import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
-import request, { agent } from 'supertest';
+import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
-import { jest } from '@jest/globals'
 
 describe('photos routes', () => {
 
@@ -24,7 +23,7 @@ describe('photos routes', () => {
         username: 'me',
         password: 'password'
       });
-    find = await agent
+    find = (await agent
       .post('/api/v1/finds')
       .send({
         title: 'huge dog',
@@ -33,7 +32,7 @@ describe('photos routes', () => {
         longitude: '-122.637980',
         category: 'scary',
         tags: ['dog', 'scary', 'hercules']
-      })
+      })).body
     
   });
 
