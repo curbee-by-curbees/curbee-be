@@ -26,11 +26,7 @@ CREATE TABLE spots (
   latitude DECIMAL(8, 6) NOT NULL,
   longitude DECIMAL(9, 6) NOT NULL,
   user_id BIGINT NOT NULL REFERENCES users(id),
-  name TEXT NOT NULL,
-  radius INT NOT NULL,
-  latitude DECIMAL(8, 6) NOT NULL,
-  longitude DECIMAL(9, 6) NOT NULL,
-  items TEXT []
+  tags TEXT []
 );
 CREATE TABLE photos (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
