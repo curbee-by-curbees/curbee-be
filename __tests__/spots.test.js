@@ -60,12 +60,12 @@ describe('spot routes', () => {
     });
   });
 
-  it.only('gets all spots via GET', async () => {
+  it('gets all spots via GET', async () => {
     
     await Spot.create(home);
     await Spot.create(work);
 
-    const res = await request.agent(app)
+    const res = await agent
       .get('/api/v1/spots');
     
     const expected = [
@@ -85,7 +85,7 @@ describe('spot routes', () => {
   it('gets a spot by ID using GET', async () => {
     const spot = await Spot.create(home);
 
-    const res = await request.agent(app)
+    const res = await agent
       .get(`/api/v1/spots/${spot.id}`);
 
     const expected = {
@@ -100,17 +100,18 @@ describe('spot routes', () => {
     const spot = await Spot.create(home);
     spot.radius = '2';
     
-    const res = await request.agent(app)
+    const res = await agent
       .put(`/api/v1/spots/${spot.id}`)
       .send(spot);
 
     const expected = {
       id: '1',
       name: 'home',
-      // userId: '1',
+      userId: '1',
       radius: 2,
       latitude: '45.505100',
       longitude: '-122.675000',
+      tags: ['couch', 'lamp']
     };
     
     expect(res.body).toEqual(expected);
@@ -119,7 +120,7 @@ describe('spot routes', () => {
   it('deletes a spot via DELETE', async () => {
     const spot = await Spot.create(home);
 
-    const res = await request.agent(app)
+    const res = await agent
       .delete(`/api/v1/spots/${spot.id}`);
 
     expect(res.body).toEqual(spot);
