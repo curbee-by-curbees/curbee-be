@@ -50,4 +50,14 @@ describe('finds routes', () => {
     expect(res.body).toEqual([catDateFix, dogDateFix]);
   });
 
+  it('gets find by id', async () => {
+    const cat = await Find.insert(find1);
+
+    const res = await request(app)
+      .get(`/api/v1/finds/${cat.id}`);
+    
+    const catDateFix = { ...cat, createdAt: expect.any(String) };
+
+    expect(res.body).toEqual(catDateFix);
+  });
 });
