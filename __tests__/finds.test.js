@@ -44,7 +44,10 @@ describe('finds routes', () => {
     const res = await request(app)
       .get('/api/v1/finds');
     
-    expect(res.body).toEqual([cat, dog]);
+    const catDateFix = { ...cat, createdAt: expect.any(String) };
+    const dogDateFix = { ...dog, createdAt: expect.any(String) };
+    
+    expect(res.body).toEqual([catDateFix, dogDateFix]);
   });
 
 });
