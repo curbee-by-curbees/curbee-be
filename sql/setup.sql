@@ -15,8 +15,8 @@ CREATE TABLE finds (
   user_id BIGINT REFERENCES users(id),
   title TEXT NOT NULL,
   is_claimed BOOLEAN NOT NULL,
-  latitude DECIMAL(8,6) NOT NULL,
-  longitude DECIMAL(9,6) NOT NULL,
+  latitude DECIMAL(8, 6) NOT NULL,
+  longitude DECIMAL(9, 6) NOT NULL,
   category TEXT NOT NULL,
   tags TEXT[],
   created_at TIMESTAMPTZ DEFAULT NOW() 

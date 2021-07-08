@@ -11,6 +11,10 @@ describe('auth routes', () => {
     password: 'password',
     phoneNumber: '14206661234'
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6658eaa484d4319c211a81049c5ef44a21fd2982
 
   beforeEach(() => {
     return setup(pool);
