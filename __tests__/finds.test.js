@@ -97,4 +97,16 @@ describe.only('finds routes', () => {
       createdAt: expect.any(String)
     }); 
   });
+
+  it('delete a find via DELETE', async() => {
+    const cat = await Find.insert(find1);
+
+    const res = await agent
+      .delete(`/api/v1/finds/${cat.id}`)
+      .send(cat);
+
+    const catDateFix = { ...cat, createdAt: expect.any(String) };
+
+    expect(res.body).toEqual(catDateFix);
+  });
 });

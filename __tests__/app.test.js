@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 
-describe.skip('auth routes', () => {
+describe('auth routes', () => {
   // test data
   const user = {
     username: 'me',
