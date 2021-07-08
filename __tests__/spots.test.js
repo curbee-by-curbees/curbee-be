@@ -73,7 +73,24 @@ describe('spot routes', () => {
     expect(res.body).toEqual(expected);
   });
 
-
+  it('updates a spot via PUT', async () => {
+    const spot = await Spot.create(home);
+    spot.radius = '2';
+    
+    const res = await request(app)
+      .put(`/api/v1/spots/${spot.id}`)
+      .send(spot);
+      
+    const expected = {
+      name: 'home',
+      // userId: '1',
+      radius: '2',
+      latitude: '45.505100',
+      longitude: '-122.675000',
+    };
+    
+    expect(res.body).toEqual(expected);
+  });
 
 
 
