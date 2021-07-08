@@ -6,10 +6,10 @@ import app from '../lib/app.js';
 
 const home = {
   name: 'home',
-  userId: '1',
+  // userId: '1',
   radius: 1,
-  latitude: 45.5051,
-  longitude: -122.6750,
+  latitude: '45.505100',
+  longitude: '-122.675000',
 };
 
 
@@ -24,7 +24,7 @@ describe('spot routes', () => {
       .send(home);
 
     expect(res.body).toEqual({
-      id: 1,
+      id: '1',
       ...home,
   
     });
