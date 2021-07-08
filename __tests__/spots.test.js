@@ -80,11 +80,12 @@ describe('spot routes', () => {
     const res = await request(app)
       .put(`/api/v1/spots/${spot.id}`)
       .send(spot);
-      
+
     const expected = {
+      id: '1',
       name: 'home',
       // userId: '1',
-      radius: '2',
+      radius: 2,
       latitude: '45.505100',
       longitude: '-122.675000',
     };
