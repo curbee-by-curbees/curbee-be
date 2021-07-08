@@ -59,6 +59,20 @@ describe('spot routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('gets a spot by ID using GET', async () => {
+    const spot = await Spot.create(home);
+
+    const res = await request(app)
+      .get(`/api/v1/spots/${spot.id}`);
+
+    const expected = {
+      id: '1',
+      ...home
+    };
+
+    expect(res.body).toEqual(expected);
+  });
+
 
 
 
