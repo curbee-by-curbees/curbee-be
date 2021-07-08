@@ -19,7 +19,7 @@ CREATE TABLE finds (
   longitude DECIMAL(9,6) NOT NULL,
   category TEXT NOT NULL,
   tags TEXT[],
-  created_at TIMESTAMP DEFAULT NOW() 
+  created_at TIMESTAMPTZ DEFAULT NOW() 
 );
 
 CREATE TABLE spots (
