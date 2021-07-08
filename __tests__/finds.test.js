@@ -48,12 +48,12 @@ describe.only('finds routes', () => {
     tags: ['statue', 'dog']
   };
 
-  it.only('creates a find via POST', async () => {
+  it('creates a find via POST', async () => {
     const res = await agent
       .post('/api/v1/finds')
       .send(find1);
 
-    expect(res.body).toEqual({ ...find1, id: '1', createdAt: expect.any(String) });
+    expect(res.body).toEqual({ ...find1, id: '1', userId: user.id, createdAt: expect.any(String) });
   });
 
   it('retrieves all finds', async () => {
@@ -87,14 +87,14 @@ describe.only('finds routes', () => {
     find.tags = ['statue', 'cat', 'porcelain'];
 
     const res = await agent
-      .put(`/api/v1/${find.id}`)
+      .put(`/api/v1/finds/${find.id}`)
       .send(find);
 
     expect(res.body).toEqual({
       ...find, 
       isClaimed: true, 
-      tags: ['statue', 'cat', 'porcelain']
-    });
-    
+      tags: ['statue', 'cat', 'porcelain'],
+      createdAt: expect.any(String)
+    }); 
   });
 });
