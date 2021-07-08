@@ -25,25 +25,30 @@ const work = {
 
 
 describe('spot routes', () => {
-  let agent;
+
+  const agent = request.agent(app);
   let user;
 
   beforeEach(async () => {
     await setup(pool);
-    agent = await request.agent(app);
+
     user = await UserService.create({
       username: 'Tis',
       password: 'password',
-      phoneNumber: '50412344555'
+      phoneNumber: '150412344555'
     });
-    await agent.post('/api/v1/auth/login')
+
+    await agent
+      .post('/api/v1/auth/login')
       .send({
         username: 'Tis',
         password: 'password'
       });
+
+    return user;
   });
 
-  it.only('creates a spot via POST', async () => {
+  it('creates a spot via POST', async () => {
     const res = await agent
       .post('/api/v1/spots')
       .send(home);
@@ -55,12 +60,12 @@ describe('spot routes', () => {
     });
   });
 
-  it('gets all spots via GET', async () => {
+  it.only('gets all spots via GET', async () => {
     
     await Spot.create(home);
     await Spot.create(work);
 
-    const res = await request(app)
+    const res = await request.agent(app)
       .get('/api/v1/spots');
     
     const expected = [
@@ -80,7 +85,7 @@ describe('spot routes', () => {
   it('gets a spot by ID using GET', async () => {
     const spot = await Spot.create(home);
 
-    const res = await request(app)
+    const res = await request.agent(app)
       .get(`/api/v1/spots/${spot.id}`);
 
     const expected = {
@@ -95,7 +100,7 @@ describe('spot routes', () => {
     const spot = await Spot.create(home);
     spot.radius = '2';
     
-    const res = await request(app)
+    const res = await request.agent(app)
       .put(`/api/v1/spots/${spot.id}`)
       .send(spot);
 
@@ -114,7 +119,7 @@ describe('spot routes', () => {
   it('deletes a spot via DELETE', async () => {
     const spot = await Spot.create(home);
 
-    const res = await request(app)
+    const res = await request.agent(app)
       .delete(`/api/v1/spots/${spot.id}`);
 
     expect(res.body).toEqual(spot);
