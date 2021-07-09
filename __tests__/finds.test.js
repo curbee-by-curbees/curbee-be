@@ -5,8 +5,7 @@ import app from '../lib/app.js';
 import Find from '../lib/models/Find.js';
 import UserService from '../lib/services/UserService.js';
 
-
-describe.only('finds routes', () => {
+describe('finds routes', () => {
   
   const agent = request.agent(app);
   let user;

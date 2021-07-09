@@ -12,7 +12,6 @@ describe('auth routes', () => {
     phoneNumber: '14206661234'
   };
 
-
   beforeEach(() => {
     return setup(pool);
   });
