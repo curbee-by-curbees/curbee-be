@@ -13,6 +13,7 @@ describe('auth routes', () => {
   };
 
 <<<<<<< HEAD:__tests__/app.test.js.example
+<<<<<<< HEAD:__tests__/app.test.js.example
 
 <<<<<<< HEAD
 describe('auth routes', () => {
@@ -27,6 +28,8 @@ describe('auth routes', () => {
 >>>>>>> 6658eaa484d4319c211a81049c5ef44a21fd2982
 =======
 >>>>>>> 36b11104bb4b06f204802360f86304bfb8302283:__tests__/app.test.js
+=======
+>>>>>>> 89c3557f370b7f9b00b72d690c3ac9c9e90f19f3:__tests__/app.test.js
   beforeEach(() => {
     return setup(pool);
   });
