@@ -6,7 +6,6 @@ import UserService from '../lib/services/UserService.js';
 
 describe('photos routes', () => {
 
-
   let agent;
   let user, find;
 
