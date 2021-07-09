@@ -12,24 +12,6 @@ describe('auth routes', () => {
     phoneNumber: '14206661234'
   };
 
-<<<<<<< HEAD:__tests__/app.test.js.example
-<<<<<<< HEAD:__tests__/app.test.js.example
-
-<<<<<<< HEAD
-describe('auth routes', () => {
-  // test data
-  const user = {
-    username: 'me',
-    password: 'password',
-    phoneNumber: '14206661234'
-  };
-
-=======
->>>>>>> 6658eaa484d4319c211a81049c5ef44a21fd2982
-=======
->>>>>>> 36b11104bb4b06f204802360f86304bfb8302283:__tests__/app.test.js
-=======
->>>>>>> 89c3557f370b7f9b00b72d690c3ac9c9e90f19f3:__tests__/app.test.js
   beforeEach(() => {
     return setup(pool);
   });
@@ -47,8 +29,6 @@ describe('auth routes', () => {
       passwordHash: expect.any(String)
     });
   });
-<<<<<<< HEAD
-=======
 
   it('logs a user in via POST', async () => {
     await UserService.create(user);
@@ -67,5 +47,4 @@ describe('auth routes', () => {
       passwordHash: expect.any(String)
     });
   });
->>>>>>> 6658eaa484d4319c211a81049c5ef44a21fd2982
 });
