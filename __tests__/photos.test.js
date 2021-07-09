@@ -82,7 +82,7 @@ describe('photos routes', () => {
       userId: user.id,
       findId: find.id,
       photo: 'nightmare.jpg'
-    });\
+    });
 
     const res = await agent
       .delete(`/api/v1/photos/${photo.id}`)
