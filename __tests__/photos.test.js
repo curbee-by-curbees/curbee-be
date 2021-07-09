@@ -3,6 +3,7 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
+import Photo from '../lib/models/Photo.js';
 
 describe('photos routes', () => {
 
@@ -75,4 +76,22 @@ describe('photos routes', () => {
     // test that the edit went through
     expect(res.body.photo).toEqual('dreamboat.jpg');
   });
+
+  it('DELETES a photo', async () => {
+    const photo = await Photo.insert({
+      userId: user.id,
+      findId: find.id,
+      photo: 'painting.jpg'
+    });
+
+    const res = await agent
+      .delete(`api/v1/photos/${photo.id}`)
+      .send(photo);
+
+
+    expect(res.body).toEqual(photo);
+  });
+
+
+
 }); 
