@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 
-describe.skip('auth routes', () => {
+describe('auth routes', () => {
   // test data
   const user = {
     username: 'me',
@@ -12,40 +12,48 @@ describe.skip('auth routes', () => {
     phoneNumber: '14206661234'
   };
 
+  describe('auth routes', () => {
+  // test data
+    const user = {
+      username: 'me',
+      password: 'password',
+      phoneNumber: '14206661234'
+    };
 
-  beforeEach(() => {
-    return setup(pool);
-  });
+    beforeEach(() => {
+      return setup(pool);
+    });
 
-  test('POST user to /auth/signup', async () => {
-    const res = await request(app)
-      .post('/api/v1/auth/signup')
-      .send(user)
+    test('POST user to /auth/signup', async () => {
+      const res = await request(app)
+        .post('/api/v1/auth/signup')
+        .send(user)
     ;
 
-    expect(res.body).toEqual({
-      id: '1',
-      username: user.username,
-      phoneNumber: user.phoneNumber,
-      passwordHash: expect.any(String)
-    });
-  });
-
-  it('logs a user in via POST', async () => {
-    await UserService.create(user);
-
-    const res = await request(app)
-      .post('/api/v1/auth/login')
-      .send({
-        username: 'me',
-        password: 'password'
+      expect(res.body).toEqual({
+        id: '1',
+        username: user.username,
+        phoneNumber: user.phoneNumber,
+        passwordHash: expect.any(String)
       });
+    });
 
-    expect(res.body).toEqual({
-      id: '1',
-      username: user.username,
-      phoneNumber: user.phoneNumber,
-      passwordHash: expect.any(String)
+    it('logs a user in via POST', async () => {
+      await UserService.create(user);
+
+      const res = await request.agent(app)
+        .post('/api/v1/auth/login')
+        .send({
+          username: 'me',
+          password: 'password'
+        });
+
+      expect(res.body).toEqual({
+        id: '1',
+        username: user.username,
+        phoneNumber: user.phoneNumber,
+        passwordHash: expect.any(String)
+      });
     });
   });
 });

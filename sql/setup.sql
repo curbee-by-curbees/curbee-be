@@ -18,8 +18,8 @@ CREATE TABLE finds (
   latitude DECIMAL(8, 6) NOT NULL,
   longitude DECIMAL(9, 6) NOT NULL,
   category TEXT NOT NULL,
-  tags TEXT[],
-  created_at TIMESTAMPTZ DEFAULT NOW() 
+  tags TEXT [],
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE spots (
@@ -27,9 +27,9 @@ CREATE TABLE spots (
   user_id BIGINT NOT NULL REFERENCES users(id),
   name TEXT NOT NULL,
   radius INT NOT NULL,
-  latitude DECIMAL(8,6) NOT NULL,
-  longitude DECIMAL(9,6) NOT NULL,
-  items TEXT[] 
+  latitude DECIMAL(8, 6) NOT NULL,
+  longitude DECIMAL(9, 6) NOT NULL,
+  tags TEXT []
 );
 
 CREATE TABLE photos (

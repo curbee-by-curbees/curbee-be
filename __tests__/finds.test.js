@@ -5,8 +5,7 @@ import app from '../lib/app.js';
 import Find from '../lib/models/Find.js';
 import UserService from '../lib/services/UserService.js';
 
-
-describe.only('finds routes', () => {
+describe('finds routes', () => {
   
   const agent = request.agent(app);
   let user;
@@ -96,5 +95,17 @@ describe.only('finds routes', () => {
       tags: ['statue', 'cat', 'porcelain'],
       createdAt: expect.any(String)
     }); 
+  });
+
+  it('delete a find via DELETE', async() => {
+    const cat = await Find.insert(find1);
+
+    const res = await agent
+      .delete(`/api/v1/finds/${cat.id}`)
+      .send(cat);
+
+    const catDateFix = { ...cat, createdAt: expect.any(String) };
+
+    expect(res.body).toEqual(catDateFix);
   });
 });
