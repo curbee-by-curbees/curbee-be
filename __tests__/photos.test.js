@@ -78,11 +78,21 @@ describe('photos routes', () => {
   });
 
   it('DELETES a photo', async () => {
-    const photo = await Photo.insert({
-      userId: user.id,
-      findId: find.id,
-      photo: 'painting.jpg'
-    });
+    // const photo = await Photo.insert({
+    //   userId: user.id,
+    //   findId: find.id,
+    //   photo: 'nightmare.jpg'
+    // });
+
+    const photo = (await agent
+      .post('/api/v1/photos')
+      .send({
+        userId: user.id,
+        findId: find.id,
+        photo: 'nightmare.jpg'
+      })).body;
+
+      console.log(photo);
 
     const res = await agent
       .delete(`api/v1/photos/${photo.id}`)
