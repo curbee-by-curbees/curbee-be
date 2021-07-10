@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="frontend/curbee.css">
+  <title>curbee</title>
+</head>
+<body>
+  <h1>Add a find</h1>
+  <form id="new-find">
+    <input placeholder="title"/>
+    <input placeholder="category"/>
+    <input placeholder="tags" />
+    <button>Upload!</button>
+  </form>
+
+  <h1>curbee</h1>
+  <p>Image upload proof of concept</p>
+  <br />
+  <button id="upload_widget" class="cloudinary-button">Upload files</button>
+  <br />
+  <br />
+  <img id="uploadedimage" src=""></img>
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+    const cloudName = "dkxdsqls8"; // replace with your own cloud name
+    const uploadPreset = "pwrgzw90"; // replace with your own upload preset
+    const curbeeId = Math.floor(Math.random() * 100);
+    const myWidget = cloudinary.createUploadWidget(
+      {
+        cloudName: cloudName,
+        uploadPreset: uploadPreset,
+        public_id: `curbee${curbeeId}`
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          console.log("Done! Here is the image info: ", result.info);
+          document.getElementById("uploadedimage").setAttribute("src", result.info.secure_url);
+        }
+      }
+    );
+
+    document.getElementById("upload_widget").addEventListener(
+      "click",
+      function () {
+        myWidget.open();
+      },
+      false
+    );
+  </script>
+<script https://cdnjs.com/libraries/cloudinary-core
+></script>
+<script type="module" src="./frontend/curbee.js"></script>
+</body>
+</html>
