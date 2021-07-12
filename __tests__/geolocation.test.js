@@ -27,6 +27,6 @@ describe ('geocoding tests', () => {
     };
 
     expect(Number(actual.latitude)).toBeCloseTo(expected.latitude, 2);
-    expect(Number(actual.longitude)).toBeCloseTo(expected.longitude, 2);
+    expect(Number(actual.longitude)).toBeCloseTo(expected.longitude, 1);
   });
 });
