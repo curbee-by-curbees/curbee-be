@@ -9,7 +9,7 @@ describe('demo routes', () => {
     return setup(pool);
   });
 
-  it('creates a item in users database with name', async () => {
+  it.skip('creates a item in users database with name', async () => {
     const res = await request(app)
       .post('/api/v1/texts')
       .send({ 
