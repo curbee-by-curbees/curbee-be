@@ -13,15 +13,15 @@ describe('demo routes', () => {
     const res = await request(app)
       .post('/api/v1/texts')
       .send({ 
-        username: 'Tis',
+        username: 'Curbee User',
         passwordHash: 'lalalala',
-        phoneNumber: '8675309'
+        phoneNumber: '+15036106163'
       });
     
     expect(res.body).toEqual({
       id: 1,
-      username: 'Tis',
-      phoneNumber: '8675309',
+      username: 'Curbee User',
+      phoneNumber: '+15036106163',
       passwordHash: 'lalalala'
     });
   });

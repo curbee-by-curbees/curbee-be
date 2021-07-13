@@ -5,7 +5,7 @@ import app from '../lib/app.js';
 import Find from '../lib/models/Find.js';
 import UserService from '../lib/services/UserService.js';
 
-describe('finds routes', () => {
+describe.skip('finds routes', () => {
   
   const agent = request.agent(app);
   let user;
