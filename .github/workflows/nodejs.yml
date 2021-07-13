@@ -20,3 +20,8 @@ jobs:
         DATABASE_URL: postgres://alchemy:alchemy@postgres:5432/alchemy
         SALT_ROUNDS: ${{secrets.SALT_ROUNDS}}
         APP_SECRET: ${{secrets.APP_SECRET}}
+        CLOUDINARY_CLOUD_NAME: ${{secrets.CLOUDINARY_CLOUD_NAME}}
+        CLOUDINARY_API_KEY: ${{secrets.CLOUDINARY_API_KEY}}
+        CLOUDINARY_API_SECRET: ${{secrets.CLOUDINARY_API_SECRET}}
+        CLOUDINARY_URL: ${{secrets.CLOUDINARY_URL}}
+        MAPQUEST_KEY: ${{secrets.MAPQUEST_KEY}}
