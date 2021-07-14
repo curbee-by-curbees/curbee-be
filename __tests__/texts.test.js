@@ -9,7 +9,7 @@ import Spot from '../lib/models/Spot.js';
 import User from '../lib/models/User.js';
 
 
-describe('demo routes', () => {
+describe('twilio utils', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -34,7 +34,7 @@ describe('demo routes', () => {
       name: 'home',
       userId: user1.id,
       radius: 5,
-      latitude: '55.519958',
+      latitude: '45.519958',
       longitude: '-122.637992',
       tags: ['couch', 'lamp']
     });
@@ -44,6 +44,7 @@ describe('demo routes', () => {
       password: 'password',
       phoneNumber: '+15036106163‬'
     });
+    
     await Spot.create({
       name: 'work',
       userId: user2.id,
