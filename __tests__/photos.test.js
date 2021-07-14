@@ -18,7 +18,7 @@ describe('photos routes', () => {
     user = await UserService.create({
       username: 'me',
       password: 'password',
-      phoneNumber: '14206661234'
+      phoneNumber: '+15036106163'
     });
 
     await agent.post('/api/v1/auth/login')

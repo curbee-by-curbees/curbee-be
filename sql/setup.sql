@@ -9,7 +9,6 @@ CREATE TABLE users (
   password_hash TEXT NOT NULL,
   phone_number VARCHAR(15) NOT NULL
 );
-
 CREATE TABLE finds (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id BIGINT REFERENCES users(id),
@@ -21,17 +20,15 @@ CREATE TABLE finds (
   tags TEXT [],
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
-
 CREATE TABLE spots (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  user_id BIGINT NOT NULL REFERENCES users(id),
   name TEXT NOT NULL,
   radius INT NOT NULL,
   latitude DECIMAL(8, 6) NOT NULL,
   longitude DECIMAL(9, 6) NOT NULL,
+  user_id BIGINT NOT NULL REFERENCES users(id),
   tags TEXT []
 );
-
 CREATE TABLE photos (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id BIGINT NOT NULL REFERENCES users(id),
