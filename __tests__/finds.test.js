@@ -48,7 +48,7 @@ describe('finds routes', () => {
     tags: ['statue', 'dog']
   };
 
-  it('creates a find via POST', async () => {
+  it.only('creates a find via POST', async () => {
     await Spot.create({
       name: 'home',
       userId: user.id,
