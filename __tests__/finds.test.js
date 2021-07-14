@@ -3,7 +3,9 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import Find from '../lib/models/Find.js';
+import Spot from '../lib/models/Spot.js';
 import UserService from '../lib/services/UserService.js';
+import FindService from '../lib/services/FindService.js';
 
 describe('finds routes', () => {
   
@@ -16,8 +18,8 @@ describe('finds routes', () => {
     user = await UserService.create({
       username: 'me',
       password: 'password',
-      phoneNumber: '14206661234' 
-    });
+      phoneNumber: '+15036106163‬'
+    });    
     
     await agent
       .post('/api/v1/auth/login')
@@ -32,8 +34,8 @@ describe('finds routes', () => {
   const find1 = {
     title: 'Porcelain cat statue',
     isClaimed: false,
-    latitude: '45.519960',
-    longitude: '-122.637980',
+    latitude: '45.519958',
+    longitude: '-122.637992',
     category: 'decor',
     tags: ['statue', 'cat']
   };
@@ -47,7 +49,34 @@ describe('finds routes', () => {
     tags: ['statue', 'dog']
   };
 
+  const find3 = {
+    title: 'Crow water',
+    isClaimed: false,
+    latitude: '55.519960',
+    longitude: '-122.637980',
+    category: 'beverage',
+    tags: ['water', 'crow']
+  };
+
   it('creates a find via POST', async () => {
+    await Spot.create({
+      name: 'home',
+      userId: user.id,
+      radius: 5,
+      latitude: '45.519958',
+      longitude: '-122.637992',
+      tags: ['couch', 'lamp']
+    });
+
+    await Spot.create({
+      name: 'work',
+      userId: user.id,
+      radius: 5,
+      latitude: '45.519965',
+      longitude: '-122.637960',
+      tags: ['couch', 'lamp']
+    });
+
     const res = await agent
       .post('/api/v1/finds')
       .send(find1);
@@ -74,7 +103,7 @@ describe('finds routes', () => {
     const res = await agent
       .get(`/api/v1/finds/${cat.id}`);
     
-    const catDateFix = { ...cat, createdAt: expect.any(String) };
+    const catDateFix = { ...cat, createdAt: expect.any(String), photos: expect.any(Array), city: expect.any(String) };
 
     expect(res.body).toEqual(catDateFix);
   });
@@ -107,5 +136,23 @@ describe('finds routes', () => {
     const catDateFix = { ...cat, createdAt: expect.any(String) };
 
     expect(res.body).toEqual(catDateFix);
+  });
+
+  it('takes in a radius and spot location and returns finds and their distances', async() => {
+    const cat = await Find.insert(find1);
+    const dog = await Find.insert(find2);
+    await Find.insert(find3);
+
+    const location = {
+      latitude: '45.519958',
+      longitude: '-122.637992',
+      radius: 5
+    };
+
+    const actual = await FindService.getNearbyFindsAndDistances(location);
+
+    const expected = [{ ...cat, distance: expect.any(Number) }, { ...dog, distance: expect.any(Number) }];
+
+    expect(actual).toEqual(expected);
   });
 });
