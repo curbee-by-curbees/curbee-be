@@ -24,7 +24,7 @@ const work = {
 };
 
 
-describe('spot routes', () => {
+describe.skip('spot routes', () => {
 
   const agent = request.agent(app);
   let user;
@@ -35,7 +35,7 @@ describe('spot routes', () => {
     user = await UserService.create({
       username: 'Tis',
       password: 'password',
-      phoneNumber: '150412344555'
+      phoneNumber: '+15036106163'
     });
 
     await agent

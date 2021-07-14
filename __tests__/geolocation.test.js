@@ -2,7 +2,7 @@ import { isWithinRadius, geocode } from '../lib/utils/geolocation.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 
-describe('radius tests', () => {
+describe.skip('radius tests', () => {
 
   test('test if two point are within each other', () => {
     const input = [
@@ -17,7 +17,7 @@ describe('radius tests', () => {
   });
 });
 
-describe ('geocoding routes tests', () => {
+describe('geocoding routes tests', () => {
   
   test('POST to /geo/geocode/:address receives address and returns lat/long', async () => {
     const input = '1313 Disneyland Dr Anaheim, CA';
