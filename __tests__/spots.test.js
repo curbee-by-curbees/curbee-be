@@ -35,7 +35,7 @@ describe.skip('spot routes', () => {
     user = await UserService.create({
       username: 'Tis',
       password: 'password',
-      phoneNumber: '150412344555'
+      phoneNumber: '+15036106163'
     });
 
     await agent

@@ -3,6 +3,7 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 import Find from '../lib/models/Find.js';
+import Spot from '../lib/models/Spot.js';
 import UserService from '../lib/services/UserService.js';
 
 describe.skip('finds routes', () => {
@@ -32,8 +33,8 @@ describe.skip('finds routes', () => {
   const find1 = {
     title: 'Porcelain cat statue',
     isClaimed: false,
-    latitude: '45.519960',
-    longitude: '-122.637980',
+    latitude: '45.519958',
+    longitude: '-122.637992',
     category: 'decor',
     tags: ['statue', 'cat']
   };
@@ -48,6 +49,24 @@ describe.skip('finds routes', () => {
   };
 
   it('creates a find via POST', async () => {
+    await Spot.create({
+      name: 'home',
+      userId: user.id,
+      radius: 5,
+      latitude: '45.519958',
+      longitude: '-122.637992',
+      tags: ['couch', 'lamp']
+    });
+
+    await Spot.create({
+      name: 'work',
+      userId: user.id,
+      radius: 5,
+      latitude: '45.519965',
+      longitude: '-122.637960',
+      tags: ['couch', 'lamp']
+    });
+
     const res = await agent
       .post('/api/v1/finds')
       .send(find1);

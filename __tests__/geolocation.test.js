@@ -17,7 +17,7 @@ describe.skip('radius tests', () => {
   });
 });
 
-describe ('geocoding routes tests', () => {
+describe('geocoding routes tests', () => {
   
   test('POST to /geo/geocode/:address receives address and returns lat/long', async () => {
     const input = '1313 Disneyland Dr Anaheim, CA';
