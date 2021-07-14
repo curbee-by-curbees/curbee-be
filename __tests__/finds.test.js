@@ -103,7 +103,7 @@ describe('finds routes', () => {
     const res = await agent
       .get(`/api/v1/finds/${cat.id}`);
     
-    const catDateFix = { ...cat, createdAt: expect.any(String) };
+    const catDateFix = { ...cat, createdAt: expect.any(String), photos: expect.any(Array), city: expect.any(String) };
 
     expect(res.body).toEqual(catDateFix);
   });
