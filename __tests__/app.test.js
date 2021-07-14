@@ -16,7 +16,7 @@ describe.skip('auth routes', () => {
     return setup(pool);
   });
 
-  test.only('POST user to /auth/signup', async () => {
+  test('POST user to /auth/signup', async () => {
     const res = await request(app)
       .post('/api/v1/auth/signup')
       .send(user)
