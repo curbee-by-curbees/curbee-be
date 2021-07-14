@@ -5,6 +5,7 @@ import app from '../lib/app.js';
 import Find from '../lib/models/Find.js';
 import Spot from '../lib/models/Spot.js';
 import UserService from '../lib/services/UserService.js';
+import FindService from '../lib/services/FindService.js';
 
 describe('finds routes', () => {
   
@@ -48,7 +49,16 @@ describe('finds routes', () => {
     tags: ['statue', 'dog']
   };
 
-  it.only('creates a find via POST', async () => {
+  const find3 = {
+    title: 'Crow water',
+    isClaimed: false,
+    latitude: '55.519960',
+    longitude: '-122.637980',
+    category: 'beverage',
+    tags: ['water', 'crow']
+  };
+
+  it('creates a find via POST', async () => {
     await Spot.create({
       name: 'home',
       userId: user.id,
@@ -126,5 +136,23 @@ describe('finds routes', () => {
     const catDateFix = { ...cat, createdAt: expect.any(String) };
 
     expect(res.body).toEqual(catDateFix);
+  });
+
+  it('takes in a radius and spot location and returns finds and their distances', async() => {
+    const cat = await Find.insert(find1);
+    const dog = await Find.insert(find2);
+    await Find.insert(find3);
+
+    const location = {
+      latitude: '45.519958',
+      longitude: '-122.637992',
+      radius: 5
+    };
+
+    const actual = await FindService.getNearbyFindsAndDistances(location);
+
+    const expected = [{ ...cat, distance: expect.any(Number) }, { ...dog, distance: expect.any(Number) }];
+
+    expect(actual).toEqual(expected);
   });
 });
