@@ -9,7 +9,7 @@ describe('auth routes', () => {
   const user = {
     username: 'me',
     password: 'password',
-    phoneNumber: '14206661234'
+    phoneNumber: '+15036106163‬'
   };
 
   beforeEach(() => {
@@ -29,6 +29,7 @@ describe('auth routes', () => {
       passwordHash: expect.any(String)
     });
   });
+  
 
   it('logs a user in via POST', async () => {
     await UserService.create(user);
@@ -48,3 +49,4 @@ describe('auth routes', () => {
     });
   });
 });
+
