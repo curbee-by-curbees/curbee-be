@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 
-describe.skip('auth routes', () => {
+describe('auth routes', () => {
   // test data
   const user = {
     username: 'me',
@@ -33,9 +33,6 @@ describe.skip('auth routes', () => {
 
   it('logs a user in via POST', async () => {
     await UserService.create(user);
-
-    it('logs a user in via POST', async () => {
-      await UserService.create(user);
 
       const res = await request.agent(app)
         .post('/api/v1/auth/login')

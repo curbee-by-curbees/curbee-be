@@ -10,7 +10,7 @@ import FindService from '../lib/services/FindService.js';
 import TextService from '../lib/services/TextService.js';
 
 
-describe.skip('twilio utils', () => {
+describe('twilio utils', () => {
   beforeEach(() => {
     return setup(pool);
   });

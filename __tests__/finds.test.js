@@ -6,7 +6,7 @@ import Find from '../lib/models/Find.js';
 import Spot from '../lib/models/Spot.js';
 import UserService from '../lib/services/UserService.js';
 
-describe.skip('finds routes', () => {
+describe('finds routes', () => {
   
   const agent = request.agent(app);
   let user;

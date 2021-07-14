@@ -24,7 +24,7 @@ const work = {
 };
 
 
-describe.skip('spot routes', () => {
+describe('spot routes', () => {
 
   const agent = request.agent(app);
   let user;
