@@ -15,8 +15,8 @@ describe('twilio utils', () => {
     return setup(pool);
   });
 
-  it.only('returns an array of user phone numbers by subscribed lookout spots', async () => {
-
+  it('returns an array of user phone numbers by subscribed lookout spots', async () => {
+    
     const user1 = await UserService.create({
       username: 'me',
       password: 'password',
