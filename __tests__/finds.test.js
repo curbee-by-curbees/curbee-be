@@ -6,7 +6,7 @@ import Find from '../lib/models/Find.js';
 import Spot from '../lib/models/Spot.js';
 import UserService from '../lib/services/UserService.js';
 
-describe.skip('finds routes', () => {
+describe('finds routes', () => {
   
   const agent = request.agent(app);
   let user;
@@ -48,7 +48,7 @@ describe.skip('finds routes', () => {
     tags: ['statue', 'dog']
   };
 
-  it('creates a find via POST', async () => {
+  it.only('creates a find via POST', async () => {
     await Spot.create({
       name: 'home',
       userId: user.id,
