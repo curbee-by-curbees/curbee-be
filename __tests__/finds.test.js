@@ -17,7 +17,7 @@ describe.skip('finds routes', () => {
       username: 'me',
       password: 'password',
       phoneNumber: '+15036106163‬'
-    });
+    });    
     
     await agent
       .post('/api/v1/auth/login')

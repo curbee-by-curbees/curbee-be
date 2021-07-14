@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 
-describe('auth routes', () => {
+describe.skip('auth routes', () => {
   // test data
   const user = {
     username: 'me',
@@ -16,7 +16,7 @@ describe('auth routes', () => {
     return setup(pool);
   });
 
-  test.only('POST user to /auth/signup', async () => {
+  test('POST user to /auth/signup', async () => {
     const res = await request(app)
       .post('/api/v1/auth/signup')
       .send(user)
