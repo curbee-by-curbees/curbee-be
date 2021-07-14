@@ -13,7 +13,7 @@ CREATE TABLE finds (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id BIGINT REFERENCES users(id),
   title TEXT NOT NULL,
-  is_claimed BOOLEAN NOT NULL,
+  is_claimed BOOLEAN DEFAULT false,
   latitude DECIMAL(8, 6) NOT NULL,
   longitude DECIMAL(9, 6) NOT NULL,
   category TEXT NOT NULL,
