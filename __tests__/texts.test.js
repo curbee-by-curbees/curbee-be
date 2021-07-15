@@ -47,7 +47,7 @@ describe('twilio utils', () => {
       tags: ['couch', 'lamp']
     });    
     
-    const cat = await FindService.create({
+    const cat = await Find.insert({
       title: 'Porcelain cat statue',
       isClaimed: false,
       latitude: '45.519960',
