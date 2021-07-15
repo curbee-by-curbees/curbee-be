@@ -124,6 +124,19 @@ describe('finds routes', () => {
     }); 
   });
 
+  it('claims a find', async() => {
+    const find = await Find.insert(find1);
+    find.isClaimed = true;
+
+    const actual = await FindService.claimFind('1');   
+    
+    expect(actual).toEqual({
+      ...find, 
+      isClaimed: true, 
+      createdAt: expect.any(Date)
+    });
+  });
+
   it('delete a find via DELETE', async() => {
     const cat = await Find.insert(find1);
 
