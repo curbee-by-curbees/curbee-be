@@ -26,6 +26,7 @@ describe('auth routes', () => {
       id: '1',
       username: user.username,
       phoneNumber: user.phoneNumber,
+      token: expect.any(String),
       passwordHash: expect.any(String)
     });
   });
@@ -44,6 +45,7 @@ describe('auth routes', () => {
       id: '1',
       username: user.username,
       phoneNumber: user.phoneNumber,
+      token: expect.any(String),
       passwordHash: expect.any(String)
     });
   });
