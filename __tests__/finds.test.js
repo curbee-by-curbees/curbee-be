@@ -187,7 +187,10 @@ describe('finds routes', () => {
 
     const actual = await FindService.getNearbyFindsAndDistances(location);
 
-    const expected = [{ ...cat, distance: expect.any(Number) }, { ...dog, distance: expect.any(Number) }];
+    const expected = [
+      { ...cat, distance: expect.any(Number), photos: expect.any(Array) }, 
+      { ...dog, distance: expect.any(Number), photos: expect.any(Array) }
+    ];
 
     expect(actual).toEqual(expected);
   });
