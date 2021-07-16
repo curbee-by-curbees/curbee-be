@@ -23,8 +23,7 @@ const work = {
   tags: ['couch', 'lamp']
 };
 
-
-describe.skip('spot routes', () => {
+describe('spot routes', () => {
 
   const agent = request.agent(app);
   let user;

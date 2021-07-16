@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import UserService from '../lib/services/UserService.js';
 
-describe.skip('auth routes', () => {
+describe('auth routes', () => {
   // test data
   const user = {
     username: 'me',
@@ -26,6 +26,7 @@ describe.skip('auth routes', () => {
       id: '1',
       username: user.username,
       phoneNumber: user.phoneNumber,
+      token: expect.any(String),
       passwordHash: expect.any(String)
     });
   });
@@ -44,6 +45,7 @@ describe.skip('auth routes', () => {
       id: '1',
       username: user.username,
       phoneNumber: user.phoneNumber,
+      token: expect.any(String),
       passwordHash: expect.any(String)
     });
   });
