@@ -6,6 +6,7 @@ import Find from '../lib/models/Find.js';
 import Spot from '../lib/models/Spot.js';
 import UserService from '../lib/services/UserService.js';
 import FindService from '../lib/services/FindService.js';
+import Photo from '../lib/models/Photo.js';
 
 describe('finds routes', () => {
   
@@ -84,7 +85,7 @@ describe('finds routes', () => {
     expect(res.body).toEqual({ ...find1, id: '1', userId: user.id, createdAt: expect.any(String) });
   });
 
-  it('retrieves all finds', async () => {
+  it('retrieves all finds via GET', async () => {
     const cat = await Find.insert(find1);
     const dog = await Find.insert(find2);
 
@@ -97,13 +98,48 @@ describe('finds routes', () => {
     expect(res.body).toEqual([catDateFix, dogDateFix]);
   });
 
-  it('gets find by id', async () => {
+  it('gets find by id via GET', async () => {
     const cat = await Find.insert(find1);
 
     const res = await agent
       .get(`/api/v1/finds/${cat.id}`);
     
-    const catDateFix = { ...cat, createdAt: expect.any(String) };
+    const catDateFix = { ...cat, createdAt: expect.any(String), photos: expect.any(Array), city: expect.any(String) };
+
+    expect(res.body).toEqual(catDateFix);
+  });
+
+  it('gets find by id via GET and sends text message to users with lookout spots within radius', async () => {
+    await Spot.create({
+      name: 'home',
+      userId: user.id,
+      radius: 5,
+      latitude: '45.519958',
+      longitude: '-122.637992',
+      tags: ['couch', 'lamp']
+    });
+
+    await Spot.create({
+      name: 'work',
+      userId: user.id,
+      radius: 5,
+      latitude: '45.519965',
+      longitude: '-122.637960',
+      tags: ['couch', 'lamp']
+    });
+
+    const cat = await Find.insert(find1);
+
+    await Photo.insert({
+      userId: user.id,
+      findId: cat.id, 
+      photo: 'https://i.pinimg.com/originals/59/54/b4/5954b408c66525ad932faa693a647e3f.jpg'
+    });
+
+    const res = await agent
+      .get(`/api/v1/finds/${cat.id}/alert`);
+
+    const catDateFix = { ...cat, createdAt: expect.any(String), photos: expect.any(Array), city: expect.any(String) };
 
     expect(res.body).toEqual(catDateFix);
   });
@@ -151,7 +187,10 @@ describe('finds routes', () => {
 
     const actual = await FindService.getNearbyFindsAndDistances(location);
 
-    const expected = [{ ...cat, distance: expect.any(Number) }, { ...dog, distance: expect.any(Number) }];
+    const expected = [
+      { ...cat, distance: expect.any(Number), photos: expect.any(Array) }, 
+      { ...dog, distance: expect.any(Number), photos: expect.any(Array) }
+    ];
 
     expect(actual).toEqual(expected);
   });
