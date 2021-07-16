@@ -19,7 +19,7 @@ describe('finds routes', () => {
     user = await UserService.create({
       username: 'me',
       password: 'password',
-      phoneNumber: '+15036106163‬'
+      phoneNumber: '+15036106163'
     });    
     
     await agent

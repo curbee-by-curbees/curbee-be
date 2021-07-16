@@ -6,17 +6,18 @@ import UserService from '../lib/services/UserService.js';
 
 describe('auth routes', () => {
   // test data
+
   const user = {
-    username: 'me',
-    password: 'password',
-    phoneNumber: '+15036106163‬'
+    username: 'Tis',
+    password: 'Password',
+    phoneNumber: '+15036106163'
   };
 
   beforeEach(() => {
     return setup(pool);
   });
 
-  test('POST user to /auth/signup', async () => {
+  test.only('POST user to /auth/signup', async () => {
     const res = await request(app)
       .post('/api/v1/auth/signup')
       .send(user)
