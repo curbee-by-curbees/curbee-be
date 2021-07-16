@@ -6,10 +6,11 @@ import UserService from '../lib/services/UserService.js';
 
 describe('auth routes', () => {
   // test data
+
   const user = {
-    username: 'me',
-    password: 'password',
-    phoneNumber: '+15036106163‬'
+    username: 'Tis',
+    password: 'Password',
+    phoneNumber: '+15036106163'
   };
 
   beforeEach(() => {
