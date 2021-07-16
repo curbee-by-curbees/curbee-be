@@ -150,16 +150,27 @@ describe('finds routes', () => {
     find.isClaimed = true;
     find.tags = ['statue', 'cat', 'porcelain'];
 
-    const res = await agent
-      .put(`/api/v1/finds/${find.id}`)
-      .send(find);
+    const actual = await FindService.updateFind({ ...find, isClaimed: true }, '1');
 
-    expect(res.body).toEqual({
+    expect(actual).toEqual({
       ...find, 
       isClaimed: true, 
       tags: ['statue', 'cat', 'porcelain'],
-      createdAt: expect.any(String)
+      createdAt: expect.any(Date)
     }); 
+  });
+
+  it('claims a find', async() => {
+    const find = await Find.insert(find1);
+    find.isClaimed = true;
+
+    const actual = await FindService.claimFind('1');   
+    
+    expect(actual).toEqual({
+      ...find, 
+      isClaimed: true, 
+      createdAt: expect.any(Date)
+    });
   });
 
   it('delete a find via DELETE', async() => {
