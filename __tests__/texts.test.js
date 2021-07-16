@@ -20,7 +20,7 @@ describe('twilio utils', () => {
     const user1 = await UserService.create({
       username: 'me',
       password: 'password',
-      phoneNumber: '+15036106163‬'
+      phoneNumber: '+15036106163'
     });
 
     await Spot.create({
@@ -35,7 +35,7 @@ describe('twilio utils', () => {
     const user2 = await UserService.create({
       username: 'you',
       password: 'password',
-      phoneNumber: '+15036106163‬'
+      phoneNumber: '+15036106163'
     });
     
     await Spot.create({
